@@ -2,27 +2,39 @@
 
 import sys
 import os
-prog = "P2"
-arg = "100"
+prog = ""
+arg = "P2.py"
+exitCode = 0
+print("program")
 if (len(sys.argv) > 1):
     try:
         prog = sys.argv[1]
-        print(sys.argv[2])
-        if (len(sys.argv) > 2):
-            if (type(arg) == str):
-                arg = sys.argv[2]
+        # print(sys.argv[2])
+        print("Only one argument present")
+        if (sys.argv[2]):
+            arg = sys.argv[2]
+            if(arg.endswith('.txt')):
+                print("Inside")
                 rf = open(arg, "r")
                 if rf.mode == "r":
                     arg = rf.read()
+                    # print(arg)
+                rf.close()
+            else:
+                arg = sys.argv[2]
+        else:
+            counter = 1
+            arg = "P2.py"
     except IndexError:
-        arg = "100"
+        print("")
     except:
         sys.exit(1)
 else:
-    prog = "P2"
+    pass
+print(arg)
 arguments = 'python3 ' + prog + ' ' + arg
-
 exitCode = os.system(arguments)
+print(exitCode)
 if (exitCode):
     print("NO")
 else:
