@@ -1,41 +1,50 @@
 #!/usr/bin/python
-
 import sys
 import os
-prog = ""
-arg = "P2.py"
-exitCode = 0
-print("program")
-if (len(sys.argv) > 1):
-    try:
-        prog = sys.argv[1]
-        # print(sys.argv[2])
-        print("Only one argument present")
-        if (sys.argv[2]):
-            arg = sys.argv[2]
-            if(arg.endswith('.txt')):
-                print("Inside")
-                rf = open(arg, "r")
-                if rf.mode == "r":
-                    arg = rf.read()
-                    # print(arg)
-                rf.close()
-            else:
+
+
+def main():
+
+    prog = ""
+    arg = "P2.py"
+    exitCode = 0
+    a = []
+    for it in sys.argv:
+        a.append(it)
+    argsn = len(a)
+
+    if (len(sys.argv) > 1):
+        try:
+            prog = sys.argv[1]
+            if (argsn >= 3):
                 arg = sys.argv[2]
-        else:
-            counter = 1
-            arg = "P2.py"
-    except IndexError:
-        print("")
-    except:
-        sys.exit(1)
-else:
-    pass
-print(arg)
-arguments = 'python3 ' + prog + ' ' + arg
-exitCode = os.system(arguments)
-print(exitCode)
-if (exitCode):
-    print("NO")
-else:
-    print("YES")
+                if(arg.endswith('.txt')):
+                    rf = open(arg, "r")
+                    if rf.mode == "r":
+                        arg = rf.read()
+                    rf.close()
+                else:
+                    arg = sys.argv[2]
+            else:
+                print("Only one argument present")
+                arg = "P2.py"
+            sys.exit(0)
+        except SystemExit:
+            print("")
+        except:
+            sys.exit(1)
+    else:
+        pass
+    print(arg)
+    arguments = 'python3 ' + prog + ' ' + arg
+
+    exitCode = os.system(arguments)
+
+    if (exitCode):
+        print("NO")
+    else:
+        print("YES")
+
+
+if __name__ == "__main__":
+    main()
